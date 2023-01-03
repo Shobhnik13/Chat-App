@@ -7,7 +7,7 @@ const style={
 }
 const googleSignIn=()=>{
     const provider = new GoogleAuthProvider();
-    signInWithRedirect(auth, provider);
+    signInWithPopup(auth, provider);
 }
 const Signin = () => {
   return (
