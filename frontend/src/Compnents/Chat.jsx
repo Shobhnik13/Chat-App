@@ -2,6 +2,7 @@ import { query,collection,onSnapshot, orderBy } from 'firebase/firestore'
 import {db} from '../Firebase'
 import React,{useState,useEffect,useRef} from 'react'
 import Message from './Message'
+import SendMessage from './SendMessage'
 const style={
 main:'flex flex-col p-[10px] relative'
 }
@@ -32,6 +33,7 @@ return(
 
     </main>
     {/*send component  */}
+    <SendMessage scrollSetting={scroll}/>
     <span ref={scroll}></span>
     </>
   )
