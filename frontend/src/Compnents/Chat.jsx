@@ -1,4 +1,4 @@
-import { query,collection,onSnapshot, orderBy } from 'firebase/firestore'
+import { query,collection,onSnapshot, orderBy, deleteDoc, doc } from 'firebase/firestore'
 import {db} from '../Firebase'
 import React,{useState,useEffect,useRef} from 'react'
 import Message from './Message'
@@ -8,8 +8,11 @@ main:'flex flex-col p-[10px] relative'
 }
 const Chat = () => {
     const [messages,setMessages]=useState([])
+    const deleteMessage=async(dummyMessage)=>{
+      await deleteDoc(doc(db,'messages',dummyMessage.id))
+    }
+  
     const scroll=useRef()
-
     useEffect(()=>{
             const q=query(collection(db,'messages'), orderBy('timestamp'))
             const unsubscribe=onSnapshot(q,(querySnapshot)=>{
@@ -27,7 +30,7 @@ const Chat = () => {
       {/* message component   */}
       {messages && messages.map((message)=>{
 return(
-    <Message key={message.id} messageText={message}/>
+    <Message key={message.id} messageText={message} deleteMessage={deleteMessage}/>
 )
       })}
 
